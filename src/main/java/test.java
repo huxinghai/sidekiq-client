@@ -33,10 +33,12 @@ public class test {
             }
 
             Date d = new Date();
-            System.out.printf("...."+ d.getTime());
+
+            System.out.println("...." + (d.getTime() / 100));
+
             Jedis j = new Jedis("localhost");
             ClientImpl c = new ClientImpl("sidekiq_server", j);
-            Worker cw = new Worker("TestWorker", new Object[]{ "11" , "22", "33" });
+            Worker cw = new Worker("TestWorker", new Object[]{ "arg1" , "arg1", "arg2" });
             c.enqueue(cw);
 
         }catch(Exception err){

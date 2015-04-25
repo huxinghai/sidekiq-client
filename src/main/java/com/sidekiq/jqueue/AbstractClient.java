@@ -3,6 +3,7 @@ package com.sidekiq.jqueue;
 import com.sidekiq.jqueue.json.ObjectMapperFactory;
 import redis.clients.jedis.Jedis;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -33,17 +34,14 @@ public abstract class AbstractClient implements Client {
     }
 
     private void joinQueue(Worker w){
-        this.redis.lpush(this.queueKey(w.getQueue()), w.toJSON());
-        this.redis.sadd(this.namespaceKey("queues"), this.namespaceKey(w.getQueue()));
+        w.setEnqueued_at(new Date().getTime() / 1000);
+        this.redis.lpush(this.namespaceKey("queue:"+ w.getQueue()), w.toJSON());
+        this.redis.sadd(this.namespaceKey("queues"), w.getQueue());
     }
 
     private void joinSchedule(Worker w){
         w.setEnqueued_at(w.getEnqueued_at() / 1000);
         this.redis.zadd(this.namespaceKey("schedule"), w.getEnqueued_at(), w.toJSON());
-    }
-
-    private String queueKey(String name){
-        return this.namespaceKey(name);
     }
 
     private String namespaceKey(String name){

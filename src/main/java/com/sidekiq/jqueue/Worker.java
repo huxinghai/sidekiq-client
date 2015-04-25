@@ -17,18 +17,20 @@ public class Worker implements Serializable {
 
     @JsonProperty
     private final String jid = new BigInteger(130, random).toString(16);
-    private Object[] args;
+    private Object[] args = new Object[]{};
     private long enqueued_at;
     private boolean retry = true;
     private String queue = "default";
     private String className;
 
     public Worker(String className, List<?> args){
+        this.className = className;
         this.args = args.toArray();
     }
 
     public Worker(String className, Object[] args){
         this.className = className;
+        this.args = args;
     }
 
     @JsonProperty(value = "class", required = true)
