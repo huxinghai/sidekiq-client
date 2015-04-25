@@ -1,5 +1,8 @@
 package com.sidekiq.jqueue;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sidekiq.jqueue.json.ObjectMapperFactory;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
@@ -12,13 +15,12 @@ public class Worker implements Serializable {
 
     SecureRandom random = new SecureRandom();
 
-//    @JsonProperty
-    private final String jid = new BigInteger(130, random).toString(16);;
-
+    @JsonProperty
+    private final String jid = new BigInteger(130, random).toString(16);
     private Object[] args;
     private long enqueued_at;
-    private boolean retry;
-    private String queue;
+    private boolean retry = true;
+    private String queue = "default";
     private String className;
 
     public Worker(String className, List<?> args){
@@ -29,6 +31,7 @@ public class Worker implements Serializable {
         this.className = className;
     }
 
+    @JsonProperty(value = "class", required = true)
     public String getClassName() {
         return className;
     }
@@ -37,6 +40,7 @@ public class Worker implements Serializable {
         this.className = className;
     }
 
+    @JsonProperty
     public Object[] getArgs() {
         return args;
     }
@@ -45,6 +49,7 @@ public class Worker implements Serializable {
         this.args = args;
     }
 
+    @JsonProperty
     public long getEnqueued_at() {
         return enqueued_at;
     }
@@ -53,6 +58,7 @@ public class Worker implements Serializable {
         this.enqueued_at = enqueued_at;
     }
 
+    @JsonProperty
     public boolean isRetry() {
         return retry;
     }
@@ -61,11 +67,26 @@ public class Worker implements Serializable {
         this.retry = retry;
     }
 
+    @JsonProperty
     public String getQueue() {
         return queue;
     }
 
     public void setQueue(String queue) {
         this.queue = queue;
+    }
+
+    @JsonProperty
+    public String getJid(){
+        return this.jid;
+    }
+
+    public String toJSON(){
+        try{
+            return ObjectMapperFactory.get().writeValueAsString(this);
+        }catch (Exception err){
+            System.out.printf(err.getMessage());
+        }
+        return null;
     }
 }
