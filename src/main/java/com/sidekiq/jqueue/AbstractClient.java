@@ -1,0 +1,56 @@
+package com.sidekiq.jqueue;
+
+import com.sidekiq.jqueue.json.ObjectMapperFactory;
+import redis.clients.jedis.Jedis;
+
+import java.util.Objects;
+
+/**
+ * Created by huxinghai on 15/4/25.
+ */
+public abstract class AbstractClient implements Client {
+
+    private String namespace;
+    private final Jedis redis;
+
+    protected AbstractClient(String namespace, Jedis redis) {
+        this.namespace = namespace;
+        this.redis = redis;
+    }
+
+    protected AbstractClient(Jedis redis){
+        this.redis = redis;
+    }
+
+    @Override
+    public String enqueue(Worker w){
+        if(w.getEnqueued_at() > 0){
+            joinSchedule(w);
+        }else{
+            joinQueue(w);
+        }
+        return w.getJid();
+    }
+
+    private void joinQueue(Worker w){
+        this.redis.lpush(this.queueKey(w.getQueue()), w.toJSON());
+        this.redis.sadd(this.namespaceKey("queues"), this.namespaceKey(w.getQueue()));
+    }
+
+    private void joinSchedule(Worker w){
+        w.setEnqueued_at(w.getEnqueued_at() / 1000);
+        this.redis.zadd(this.namespaceKey("schedule"), w.getEnqueued_at(), w.toJSON());
+    }
+
+    private String queueKey(String name){
+        return this.namespaceKey(name);
+    }
+
+    private String namespaceKey(String name){
+        if(this.namespace == null || this.namespace.isEmpty()){
+            return name;
+        }
+        return this.namespace + ":"+ name;
+    }
+
+}
