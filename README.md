@@ -1,9 +1,11 @@
 # sidekiq-client
-java sidekiq client
+
+sidekiq queue client support java language
 
 
 Example usage
 
+```java
         ClientImpl client = new ClientImpl("namespace", new Jedis("localhost"));
 
         Worker worker = new Worker("TestWorker", new Object[]{ "arg1" , "arg1", Arrays.asList("inner", 4.5) });
@@ -22,3 +24,4 @@ Example usage
         worker.setEnqueued_at(d.getTime());
         worker.setQueue("notify");
         client.enqueue(worker);
+ ```
