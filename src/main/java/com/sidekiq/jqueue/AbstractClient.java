@@ -1,10 +1,8 @@
 package com.sidekiq.jqueue;
 
-import com.sidekiq.jqueue.json.ObjectMapperFactory;
 import redis.clients.jedis.Jedis;
 
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Created by huxinghai on 15/4/25.

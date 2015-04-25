@@ -10,9 +10,6 @@ public final class ObjectMapperFactory {
 
     static {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-//        final DateFormat jsonDateFormat = new CompositeDateFormat();
-//        mapper.getDeserializationConfig().with(jsonDateFormat);
-//        mapper.getSerializationConfig().with(jsonDateFormat);
     }
 
     /**

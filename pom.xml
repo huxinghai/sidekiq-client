@@ -9,7 +9,18 @@
     <packaging>maven-plugin</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>sidekiq-client</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/huxinghai1988/sidekiq-client</url>
+    <description>
+        sidekiq queue client support java language
+    </description>
+    <scm>
+        <connection>scm:git:git@github.com:huxinghai1988/sidekiq-client.git</connection>
+        <developerConnection>scm:git:git@github.com:huxinghai1988/sidekiq-client.git</developerConnection>
+        <url>https://github.com/huxinghai1988/sidekiq-client</url>
+    </scm>
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -30,6 +41,17 @@
             <version>2.5.1</version>
         </dependency>
     </dependencies>
-
-
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <contributors>
+        <contributor>
+            <name>Ka Ka</name>
+            <url>https://github.com/huxinghai1988</url>
+        </contributor>
+    </contributors>
 </project>
