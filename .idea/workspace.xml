@@ -101,7 +101,8 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
               <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#459#460#0" expanded="false" />
+                <element signature="e#488#489#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -774,12 +775,12 @@
       <option name="number" value="Default" />
       <updated>1429842428492</updated>
       <workItem from="1429842432212" duration="7185000" />
-      <workItem from="1429950776173" duration="20725000" />
+      <workItem from="1429950776173" duration="21274000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27910000" />
+    <option name="totallyTimeSpent" value="28459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="23" width="1280" height="773" extended-state="0" />
@@ -940,7 +941,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#459#460#0" expanded="false" />
+            <element signature="e#488#489#0" expanded="false" />
           </folding>
         </state>
       </provider>
