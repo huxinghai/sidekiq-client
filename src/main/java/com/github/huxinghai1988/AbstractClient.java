@@ -1,4 +1,4 @@
-package com.sidekiq.jqueue;
+package com.github.huxinghai1988;
 
 import redis.clients.jedis.Jedis;
 

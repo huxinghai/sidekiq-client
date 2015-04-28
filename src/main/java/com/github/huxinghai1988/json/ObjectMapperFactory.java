@@ -1,4 +1,4 @@
-package com.sidekiq.jqueue.json;
+package com.github.huxinghai1988.json;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

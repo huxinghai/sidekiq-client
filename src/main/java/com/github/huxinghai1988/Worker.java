@@ -1,7 +1,7 @@
-package com.sidekiq.jqueue;
+package com.github.huxinghai1988;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sidekiq.jqueue.json.ObjectMapperFactory;
+import com.github.huxinghai1988.json.ObjectMapperFactory;
 
 import java.io.Serializable;
 import java.math.BigInteger;

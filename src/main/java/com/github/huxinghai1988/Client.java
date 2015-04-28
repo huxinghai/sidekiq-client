@@ -1,4 +1,4 @@
-package com.sidekiq.jqueue;
+package com.github.huxinghai1988;
 
 /**
  * Created by huxinghai on 15/4/25.
