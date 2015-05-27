@@ -5,3 +5,4 @@ target/
 *.class
 stdout
 src/main/java/test.java
+.idea/*
