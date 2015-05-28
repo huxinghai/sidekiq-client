@@ -21,18 +21,6 @@
     <prerequisites>
         <maven>3.0.0</maven>
     </prerequisites>
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>sidekiq-client</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>releases</id>
-            <name>sidekiq-client</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -66,4 +54,14 @@
             <url>https://github.com/huxinghai1988</url>
         </contributor>
     </contributors>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>releases</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>
