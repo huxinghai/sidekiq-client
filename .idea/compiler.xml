@@ -25,5 +25,8 @@
         <module name="sidekiq-client" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sidekiq-client" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
