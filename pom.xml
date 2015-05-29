@@ -55,6 +55,23 @@
         </contributor>
     </contributors>
 
+    <developers>
+        <developer>
+            <id>Ka Ka</id>
+            <name>huxinghai</name>
+            <email>banseon@126.com</email>
+            <url>http://168ta.com</url>
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+            <properties>
+                <dept>No</dept>
+            </properties>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
