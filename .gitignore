@@ -4,5 +4,5 @@
 target/
 *.class
 stdout
-src/main/java/test.java
+src/test/java/test.java
 .idea/*

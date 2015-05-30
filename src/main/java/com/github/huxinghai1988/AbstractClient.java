@@ -3,6 +3,7 @@ package com.github.huxinghai1988;
 import redis.clients.jedis.Jedis;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by huxinghai on 15/4/25.
@@ -29,6 +30,25 @@ public abstract class AbstractClient implements Client {
             joinQueue(w);
         }
         return w.getJid();
+    }
+
+    @Override
+    public Worker find(String jid){
+        Set<String> list = this.redis.zrange(this.namespaceKey("schedule"), 0, -1);
+        for(String json : list){
+            Worker w = Worker.parse(json);
+            if(w != null && w.getJid().equals(jid))
+                return w;
+        }
+        return null;
+    }
+
+    @Override
+    public long delete(String jid){
+        Worker w = find(jid);
+        String key = this.namespaceKey("schedule");
+        this.redis.zrem(key, w.toJSON());
+        return this.redis.zcard(key);
     }
 
     private void joinQueue(Worker w){

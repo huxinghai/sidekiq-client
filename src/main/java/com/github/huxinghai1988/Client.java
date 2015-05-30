@@ -7,4 +7,7 @@ public interface Client {
 
     String enqueue(Worker worker);
 
+    Worker find(String jid);
+
+    long delete(String jid);
 }
