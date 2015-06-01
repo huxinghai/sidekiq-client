@@ -7,7 +7,7 @@ maven install
 <dependency>
   <groupId>com.github.huxinghai1988</groupId>
   <artifactId>sidekiq-client-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.2</version>
 </dependency>
 ```
 
