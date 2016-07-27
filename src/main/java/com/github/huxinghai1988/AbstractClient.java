@@ -46,6 +46,7 @@ public abstract class AbstractClient implements Client {
     @Override
     public long delete(String jid){
         Worker w = find(jid);
+        if(w == null) return 0;
         String key = this.namespaceKey("schedule");
         this.redis.zrem(key, w.toJSON());
         return this.redis.zcard(key);
