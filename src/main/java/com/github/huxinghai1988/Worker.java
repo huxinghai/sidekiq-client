@@ -1,28 +1,31 @@
 package com.github.huxinghai1988;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.huxinghai1988.json.ObjectMapperFactory;
-
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.huxinghai1988.json.ObjectMapperFactory;
 
 /**
  * Created by huxinghai on 15/4/24.
  */
 public class Worker implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8310484531276432471L;
+
     SecureRandom random = new SecureRandom();
 
     private String jid;
     private Object[] args = new Object[]{};
-    private long enqueued_at;
+    private double enqueued_at;
     private boolean retry = true;
     private String queue = "default";
     private String className;
@@ -38,6 +41,10 @@ public class Worker implements Serializable {
         this.defaultInit();
         this.className = className;
         this.args = args;
+    }
+    
+    public Worker() {
+        this.defaultInit();
     }
 
     @JsonProperty(value = "class", required = true)
@@ -59,11 +66,11 @@ public class Worker implements Serializable {
     }
 
     @JsonProperty
-    public long getEnqueued_at() {
+    public double getEnqueued_at() {
         return enqueued_at;
     }
 
-    public void setEnqueued_at(long enqueued_at) {
+    public void setEnqueued_at(double enqueued_at) {
         this.enqueued_at = enqueued_at;
     }
 
@@ -104,12 +111,15 @@ public class Worker implements Serializable {
     public String getJid(){
         return this.jid;
     }
+    
+    public void setJid(String jid) {
+        this.jid = jid;
+    }
 
     public Worker withJid(String jid){
         this.jid = jid;
         return this;
     }
-
 
     public String toJSON(){
         try{
@@ -120,10 +130,11 @@ public class Worker implements Serializable {
         return null;
     }
 
+    @SuppressWarnings("rawtypes")
     public static Worker parse(String json){
         try{
-            Map<String, Object> m = ObjectMapperFactory.get().readValue(json, Map.class);
-            return new Worker(m.get("class").toString(), ((ArrayList) m.get("args")).toArray()).withEnqueuedAt(Long.valueOf(m.get("enqueued_at").toString())).withQueue(m.get("queue").toString()).withRetry((Boolean) m.get("retry")).withJid(m.get("jid").toString());
+            Map<String, Object> m = ObjectMapperFactory.get().readValue(json, new TypeReference<Map<String, Object>>() {});
+            return new Worker((String)m.get("class"), (ArrayList) m.get("args")).withEnqueuedAt(((Number) m.get("enqueued_at")).longValue()).withQueue((String)m.get("queue")).withRetry((Boolean) m.get("retry")).withJid((String)m.get("jid"));
         }catch (Exception err){
             System.out.printf(err.getMessage());
         }
@@ -133,4 +144,5 @@ public class Worker implements Serializable {
     private void defaultInit(){
         this.jid = new BigInteger(130, random).toString(16);
     }
+    
 }
