@@ -53,7 +53,6 @@ public abstract class AbstractClient implements Client {
     }
     
     public RetryWork findRetry(String jid) {
-        System.out.println("find retry work");
         if(jid == null || jid.isEmpty()) return null;
         Set<String> list = this.redis.zrange(this.namespaceKey("retry"), 0, -1);
         for(String json : list){
@@ -68,7 +67,6 @@ public abstract class AbstractClient implements Client {
     }
     
     public String findJson(String name, String jid) {
-        System.out.println("find retry work");
         if(jid == null || jid.isEmpty()) return null;
         Set<String> list = this.redis.zrange(this.namespaceKey(name), 0, -1);
         for(String json : list){
@@ -80,7 +78,6 @@ public abstract class AbstractClient implements Client {
     }
     
     public long deleteRetry(String jid){
-        System.out.println("delete retry work");
         String json = findJson("retry", jid);
         String key = this.namespaceKey("retry");
         if(json != null) {
