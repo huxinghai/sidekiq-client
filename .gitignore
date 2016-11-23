@@ -7,4 +7,4 @@ stdout
 src/test/java/test.java
 .idea/*
 .DS_Store
-
+sidekiq-client.iml

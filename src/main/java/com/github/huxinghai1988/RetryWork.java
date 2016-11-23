@@ -146,7 +146,7 @@ public class RetryWork extends Worker implements Serializable {
     }
 
     /**
-     * @return the retired_at
+     * @return the retried_at
      */
     @JsonProperty
     public double getRetried_at() {
@@ -154,7 +154,7 @@ public class RetryWork extends Worker implements Serializable {
     }
 
     /**
-     * @param retired_at the retired_at to set
+     * @param retried_at the retired_at to set
      */
     public void setRetried_at(double retried_at) {
         this.retried_at = retried_at;
