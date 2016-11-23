@@ -21,8 +21,7 @@ public abstract class AbstractClient implements Client {
     protected AbstractClient(Jedis redis){
         this.redis = redis;
     }
-
-    @Override
+    
     public String enqueue(Worker w){
         if(w.getEnqueued_at() > 0){
             joinSchedule(w);
@@ -32,7 +31,6 @@ public abstract class AbstractClient implements Client {
         return w.getJid();
     }
 
-    @Override
     public Worker find(String jid){
         Set<String> list = this.redis.zrange(this.namespaceKey("schedule"), 0, -1);
         for(String json : list){
@@ -42,13 +40,52 @@ public abstract class AbstractClient implements Client {
         }
         return null;
     }
-
-    @Override
+    
     public long delete(String jid){
-        Worker w = find(jid);
-        if(w == null) return 0;
+        String json = findJson("schedule", jid);
         String key = this.namespaceKey("schedule");
-        this.redis.zrem(key, w.toJSON());
+        if(json != null && json != "") {
+            this.redis.zrem(key, json);
+            return this.redis.zcard(key);
+        } else {
+            return deleteRetry(jid);
+        }        
+    }
+    
+    public RetryWork findRetry(String jid) {
+        System.out.println("find retry work");
+        if(jid == null || jid.isEmpty()) return null;
+        Set<String> list = this.redis.zrange(this.namespaceKey("retry"), 0, -1);
+        for(String json : list){
+            if(json != null && !json.isEmpty()) {
+                System.out.println("json: "+ json);
+                RetryWork w = RetryWork.parse(json);
+                if(w != null && w.getJid().equals(jid))
+                    return w;
+            }
+        }
+        return null;
+    }
+    
+    public String findJson(String name, String jid) {
+        System.out.println("find retry work");
+        if(jid == null || jid.isEmpty()) return null;
+        Set<String> list = this.redis.zrange(this.namespaceKey(name), 0, -1);
+        for(String json : list){
+            if(json != null && !json.isEmpty()) {
+                return json;
+            }
+        }
+        return null;
+    }
+    
+    public long deleteRetry(String jid){
+        System.out.println("delete retry work");
+        String json = findJson("retry", jid);
+        String key = this.namespaceKey("retry");
+        if(json != null) {
+            this.redis.zrem(key, json);
+        }
         return this.redis.zcard(key);
     }
 
@@ -69,5 +106,5 @@ public abstract class AbstractClient implements Client {
         }
         return this.namespace + ":"+ name;
     }
-
+    
 }
