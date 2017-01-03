@@ -7,7 +7,7 @@
     <groupId>com.github.huxinghai1988</groupId>
     <artifactId>sidekiq-client-plugin</artifactId>
     <packaging>jar</packaging>
-    <version>1.4</version>
+    <version>1.5.0</version>
     <name>sidekiq-client</name>
     <url>https://github.com/huxinghai1988/sidekiq-client</url>
     <description>
