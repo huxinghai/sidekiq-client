@@ -45,20 +45,17 @@ public abstract class AbstractClient implements Client {
         String json = findJson("schedule", jid);
         String key = this.namespaceKey("schedule");
         if(json != null && json != "") {
-            this.redis.zrem(key, json);
-            return this.redis.zcard(key);
+            return this.redis.zrem(key, json);
         } else {
             return deleteRetry(jid);
         }        
     }
     
     public RetryWork findRetry(String jid) {
-        System.out.println("find retry work");
         if(jid == null || jid.isEmpty()) return null;
         Set<String> list = this.redis.zrange(this.namespaceKey("retry"), 0, -1);
         for(String json : list){
             if(json != null && !json.isEmpty()) {
-                System.out.println("json: "+ json);
                 RetryWork w = RetryWork.parse(json);
                 if(w != null && w.getJid().equals(jid))
                     return w;
@@ -68,7 +65,6 @@ public abstract class AbstractClient implements Client {
     }
     
     public String findJson(String name, String jid) {
-        System.out.println("find retry work");
         if(jid == null || jid.isEmpty()) return null;
         Set<String> list = this.redis.zrange(this.namespaceKey(name), 0, -1);
         for(String json : list){
@@ -84,7 +80,7 @@ public abstract class AbstractClient implements Client {
         String json = findJson("retry", jid);
         String key = this.namespaceKey("retry");
         if(json != null) {
-            this.redis.zrem(key, json);
+            return this.redis.zrem(key, json);
         }
         return this.redis.zcard(key);
     }
