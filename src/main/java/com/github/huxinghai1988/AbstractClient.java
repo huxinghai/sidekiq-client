@@ -44,6 +44,8 @@ public abstract class AbstractClient implements Client {
     public long delete(String jid){
         String json = findJson("schedule", jid);
         String key = this.namespaceKey("schedule");
+        System.out.println("delete(String) - key: " + key);
+        System.out.println("delete(String) - json: " + json);
         if(json != null && json != "") {
             return this.redis.zrem(key, json);
         } else {
@@ -69,16 +71,19 @@ public abstract class AbstractClient implements Client {
         Set<String> list = this.redis.zrange(this.namespaceKey(name), 0, -1);
         for(String json : list){
             if(json != null && !json.isEmpty()) {
-                return json;
+                Worker w = Worker.parse(json);
+                if(w != null && w.getJid().equals(jid))
+                    return json;
             }
         }
         return null;
     }
     
     public long deleteRetry(String jid){
-        System.out.println("delete retry work");
         String json = findJson("retry", jid);
         String key = this.namespaceKey("retry");
+        System.out.println("deleteRetry(String) - key: " + key);
+        System.out.println("deleteRetry(String) - json: " + json);
         if(json != null) {
             return this.redis.zrem(key, json);
         }
