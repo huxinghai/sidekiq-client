@@ -45,17 +45,12 @@ public class RetryWork extends Worker implements Serializable {
         super();
     }
     
-    /**
-     * @return the created_at
-     */
+   
     @JsonProperty
     public double getCreated_at() {
         return created_at;
     }
 
-    /**
-     * @param created_at the created_at to set
-     */
     public void setCreated_at(double created_at) {
         this.created_at = created_at;
     }
@@ -65,17 +60,11 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    /**
-     * @return the error_message
-     */
     @JsonProperty
     public Object getError_message() {
         return error_message;
     }
 
-    /**
-     * @param error_message the error_message to set
-     */
     public void setError_message(Object error_message) {
         this.error_message = error_message;
     }
@@ -85,17 +74,11 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    /**
-     * @return the error_class
-     */
     @JsonProperty
     public String getError_class() {
         return error_class;
     }
 
-    /**
-     * @param error_class the error_class to set
-     */
     public void setError_class(String error_class) {
         this.error_class = error_class;
     }
@@ -105,17 +88,11 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    /**
-     * @return the failed_at
-     */
     @JsonProperty
     public double getFailed_at() {
         return failed_at;
     }
 
-    /**
-     * @param failed_at the failed_at to set
-     */
     public void setFailed_at(double failed_at) {
         this.failed_at = failed_at;
     }
@@ -125,17 +102,11 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    /**
-     * @return the retry_count
-     */
     @JsonProperty
     public int getRetry_count() {
         return retry_count;
     }
     
-    /**
-     * @param retry_count the retry_count to set
-     */
     public void setRetry_count(int retry_count) {
         this.retry_count = retry_count;
     }
@@ -145,17 +116,12 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    /**
-     * @return the retired_at
-     */
+    
     @JsonProperty
     public double getRetried_at() {
         return retried_at;
     }
 
-    /**
-     * @param retired_at the retired_at to set
-     */
     public void setRetried_at(double retried_at) {
         this.retried_at = retried_at;
     }

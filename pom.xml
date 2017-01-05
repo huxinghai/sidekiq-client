@@ -74,7 +74,7 @@
 
     <build>
         <plugins>
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <executions>
@@ -86,7 +86,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -197,7 +197,7 @@
             </resource>
         </resources>
     </build>
-    <distributionManagement>
+    <!-- <distributionManagement>
         <snapshotRepository>
             <id>releases</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -206,5 +206,15 @@
             <id>releases</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
+    </distributionManagement> -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://192.168.9.18:8001/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://192.168.9.18:8001/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
