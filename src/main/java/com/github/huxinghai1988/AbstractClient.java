@@ -70,10 +70,8 @@ public abstract class AbstractClient implements Client {
         if(jid == null || jid.isEmpty()) return null;
         Set<String> list = this.redis.zrange(this.namespaceKey(name), 0, -1);
         for(String json : list){
-            if(json != null && !json.isEmpty()) {
-                Worker w = Worker.parse(json);
-                if(w != null && w.getJid().equals(jid))
-                    return json;
+            if(json != null && !json.isEmpty() && json.contains(jid)) {
+                return json;
             }
         }
         return null;
