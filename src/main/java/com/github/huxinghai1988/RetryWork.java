@@ -116,7 +116,6 @@ public class RetryWork extends Worker implements Serializable {
         return this;
     }
 
-    
     @JsonProperty
     public double getRetried_at() {
         return retried_at;
