@@ -1,6 +1,6 @@
 # sidekiq-client
 
-sidekiq queue client support java language
+sidekiq queue client that supports the Java language.
 
 maven install
 ```xml
